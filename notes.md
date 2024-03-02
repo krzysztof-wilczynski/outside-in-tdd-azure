@@ -34,4 +34,6 @@ yarn create playwright
 - update vitest paths in config
 
 ## [Setting up automatic deployment](https://outsidein.dev/vue/project-setup#setting-up-automatic-deployment)
-
+- [create azure static web app](https://learn.microsoft.com/en-us/azure/static-web-apps/get-started-portal?tabs=vue&pivots=github)
+- change output_location in generated .yml to 'dist/spa'
+-
