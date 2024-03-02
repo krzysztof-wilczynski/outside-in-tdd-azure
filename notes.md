@@ -38,4 +38,27 @@ yarn create playwright
 - change output_location in generated .yml to 'dist/spa'
 
 # [Vertical slice](https://outsidein.dev/vue/vertical-slice)
+## [End-to-end test](https://outsidein.dev/vue/vertical-slice#end-to-end-test)
 
+```typescript
+import {test, expect} from '@playwright/test'
+
+test('shows restaurants from the server', async ({page}) => {
+  const sushiPlace = 'Sushi Place'
+  const pizzaPlace = 'Pizza Place'
+
+  await page.route('https://api.outsidein.dev/<API_KEY>/restaurants',
+    async route => {
+      const json = [
+        {id: 1, name: sushiPlace},
+        {id: 2, name: pizzaPlace}
+      ]
+      await route.fulfill({json})
+    })
+
+  await page.goto('/')
+  await expect(page.getByText(sushiPlace)).toBeVisible()
+  await expect(page.getByText(pizzaPlace)).toBeVisible()
+})
+```
+- uncomment 'webServer' (line 72) and use.baseURL (line 27) in playwright.config.ts (change port to :9000)
