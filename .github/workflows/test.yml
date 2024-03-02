@@ -18,7 +18,7 @@ jobs:
       - name: Install dependencies
         run: npm install -g yarn && yarn install --frozen-lockfile
       - name: Unit tests
-        run: yarn test:unit
+        run: yarn test:unit:ci
       - name: Install Playwright browsers
         run: yarn playwright install --with-deps
       - name: Run e2e tests
