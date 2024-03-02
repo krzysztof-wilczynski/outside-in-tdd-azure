@@ -5,4 +5,6 @@
 </template>
 
 <script setup lang="ts">
+import RestaurantScreen from 'components/RestaurantScreen.vue'
+
 </script>
