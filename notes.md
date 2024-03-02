@@ -1,4 +1,6 @@
-## Creating the app
+# [Project setup](https://outsidein.dev/vue/project-setup)
+## [Creating the app](https://outsidein.dev/vue/project-setup#creating-the-app)
+(quasar-cli instead of vue-cli, provides better DX than plugging quasar to existing vite project)
 
 ```text
 $ yarn global add @quasar/cli
@@ -15,3 +17,17 @@ $ yarn create quasar
 √ Check the features needed for your project: » ESLint, State Management (Pinia), Axios
 √ Pick an ESLint preset: » Prettier
 ```
+
+## [Running Tests On CI](https://outsidein.dev/vue/project-setup#running-tests-on-ci)
+[quasar-testing-vitest](https://testing.quasar.dev/packages/unit-vitest/) (vitest instead of jest)
+```text
+$ quasar ext add @quasar/testing-unit-vitest
+```
+
+[playwright](https://playwright.dev/docs/intro) (playwright instead of cypress)
+```text
+yarn create playwright
+√ Add a GitHub Actions workflow? (y/N) · true
+```
+- put e2e tests into 'e2e' folder in /tests
+- change playwright.config.ts 'testDir' path
