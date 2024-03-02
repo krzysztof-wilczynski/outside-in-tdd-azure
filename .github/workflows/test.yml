@@ -17,7 +17,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: npm install -g yarn && yarn install --frozen-lockfile
-      - name: Unit tests
+      - name: Run unit tests
         run: yarn test:unit:ci
       - name: Install Playwright browsers
         run: yarn playwright install --with-deps

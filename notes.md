@@ -31,3 +31,7 @@ yarn create playwright
 ```
 - put e2e tests into 'e2e' folder in /tests
 - change playwright.config.ts 'testDir' path
+- update vitest paths in config
+
+## [Setting up automatic deployment](https://outsidein.dev/vue/project-setup#setting-up-automatic-deployment)
+
