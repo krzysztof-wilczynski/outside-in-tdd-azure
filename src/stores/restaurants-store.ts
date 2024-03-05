@@ -1,4 +1,5 @@
-import {defineStore, StoreDefinition} from 'pinia';
+import {defineStore} from 'pinia';
+import api from 'src/api';
 
 export const useRestaurantsStore = defineStore('restaurants', {
   state: () => {
@@ -8,12 +9,8 @@ export const useRestaurantsStore = defineStore('restaurants', {
   },
   getters: {},
   actions: {
-    async load(api: { loadRestaurants: () => Promise<any>; }) {
-      try {
-        this.restaurantsList = await api.loadRestaurants()
-      } catch (error) {
-        console.log(error)
-      }
+    async load() {
+      this.restaurantsList = await api.loadRestaurants()
     }
   }
 });
