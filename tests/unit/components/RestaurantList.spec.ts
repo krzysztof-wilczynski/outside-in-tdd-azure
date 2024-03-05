@@ -1,9 +1,10 @@
-import {describe, it, expect} from 'vitest';
+import {describe, it, expect, beforeEach} from 'vitest';
 import {installQuasarPlugin} from '@quasar/quasar-app-extension-testing-unit-vitest';
-import {mount} from '@vue/test-utils'
-import {useRestaurantsStore} from 'stores/restaurants-store'
+import {mount, VueWrapper} from '@vue/test-utils'
+import {RestaurantInfo, useRestaurantsStore} from 'stores/restaurants-store'
 import {installPinia} from 'tests/unit/install-pinia';
 import RestaurantList from 'components/RestaurantList.vue';
+import {Store} from 'pinia';
 
 installQuasarPlugin();
 installPinia({
@@ -18,20 +19,25 @@ installPinia({
   stubActions: false
 })
 
+// TODO: typing
+let wrapper: VueWrapper;
+let store: Store<'restaurants', { restaurantsList: RestaurantInfo[] }, unknown, { load(): void }>;
+
+beforeEach(() => {
+  wrapper = mount(RestaurantList);
+  store = useRestaurantsStore();
+})
+
+const findByTestId = (wrapper: VueWrapper, testId: string, index: number) =>
+  wrapper.findAll(`[data-testid="${testId}"]`).at(index)
+
 describe('RestaurantList', () => {
   it('loads restaurants on mount', () => {
-    mount(RestaurantList)
-    const store = useRestaurantsStore()
-
     expect(store.load).toHaveBeenCalled()
   })
 
   it('displays the restaurants', () => {
-
-    const wrapper = mount(RestaurantList)
-    // const store = useRestaurantsStore()
-    // @ts-ignore
-    const firstRestaurantName = wrapper.findAll('[data-testid="restaurant"]').at(0).text()
-    expect(firstRestaurantName).toBe('Sushi Place')
+    expect(findByTestId(wrapper, 'restaurant', 0)?.text()).toBe('Sushi Place')
+    expect(findByTestId(wrapper, 'restaurant', 1)?.text()).toBe('Pizza Place')
   })
 })

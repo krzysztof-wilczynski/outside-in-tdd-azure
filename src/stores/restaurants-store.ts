@@ -1,4 +1,4 @@
-import {defineStore} from 'pinia';
+import {defineStore, StoreDefinition} from 'pinia';
 
 export const useRestaurantsStore = defineStore('restaurants', {
   state: () => {
@@ -6,6 +6,7 @@ export const useRestaurantsStore = defineStore('restaurants', {
       restaurantsList: [] as RestaurantInfo[]
     }
   },
+  getters: {},
   actions: {
     load() {
       const x = () => ({});
@@ -13,7 +14,9 @@ export const useRestaurantsStore = defineStore('restaurants', {
   },
 });
 
-interface RestaurantInfo {
+export type RestaurantStore = typeof useRestaurantsStore
+
+export interface RestaurantInfo {
   id: number,
   name: string
 }
