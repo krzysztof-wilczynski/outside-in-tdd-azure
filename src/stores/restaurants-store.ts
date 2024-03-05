@@ -8,13 +8,15 @@ export const useRestaurantsStore = defineStore('restaurants', {
   },
   getters: {},
   actions: {
-    load() {
-      const x = () => ({});
-    },
-  },
+    async load(api: { loadRestaurants: () => Promise<any>; }) {
+      try {
+        this.restaurantsList = await api.loadRestaurants()
+      } catch (error) {
+        console.log(error)
+      }
+    }
+  }
 });
-
-export type RestaurantStore = typeof useRestaurantsStore
 
 export interface RestaurantInfo {
   id: number,
