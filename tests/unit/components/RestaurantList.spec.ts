@@ -6,7 +6,17 @@ import {installPinia} from 'tests/unit/install-pinia';
 import RestaurantList from 'components/RestaurantList.vue';
 
 installQuasarPlugin();
-installPinia({stubActions: false})
+installPinia({
+  initialState: {
+    restaurants: { // name of store
+      restaurantsList: [
+        {id: 1, name: 'Sushi Place'},
+        {id: 2, name: 'Pizza Place'}
+      ]
+    },
+  },
+  stubActions: false
+})
 
 describe('RestaurantList', () => {
   it('loads restaurants on mount', () => {
@@ -14,5 +24,14 @@ describe('RestaurantList', () => {
     const store = useRestaurantsStore()
 
     expect(store.load).toHaveBeenCalled()
+  })
+
+  it('displays the restaurants', () => {
+
+    const wrapper = mount(RestaurantList)
+    // const store = useRestaurantsStore()
+    // @ts-ignore
+    const firstRestaurantName = wrapper.findAll('[data-testid="restaurant"]').at(0).text()
+    expect(firstRestaurantName).toBe('Sushi Place')
   })
 })

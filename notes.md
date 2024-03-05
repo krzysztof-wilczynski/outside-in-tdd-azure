@@ -110,9 +110,14 @@ globals: true
 
 restaurants-store.ts
 ```typescript
-import { defineStore } from 'pinia';
+import {defineStore} from 'pinia';
 
 export const useRestaurantsStore = defineStore('restaurants', {
+  state: () => {
+    return {
+      restaurantsList: [] as RestaurantInfo[]
+    }
+  },
   actions: {
     load() {
       const x = () => ({});
@@ -120,4 +125,23 @@ export const useRestaurantsStore = defineStore('restaurants', {
   },
 });
 
+interface RestaurantInfo {
+  id: number,
+  name: string
+}
+```
+
+installPinia accepts `options` as a parameter, so you can set initial store values:
+```typescript
+installPinia({
+  initialState: {
+    restaurants: { // name of store
+      restaurantsList: [
+        {id: 1, name: 'Sushi Place'},
+        {id: 2, name: 'Pizza Place'}
+      ]
+    },
+  },
+  stubActions: false
+})
 ```
