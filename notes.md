@@ -204,8 +204,8 @@ const api = {
 export default api
 ```
 
-`VITE_API_KEY` is stored in .env and Azure Static App environment variables
+`VITE_API_KEY` is stored in .env and Azure Static App environment variables and Github Actions secrets
 
-*remember that playwright tests require using `process.env` instead of `import.meta.env`*
+*remember to use `process.env` instead of `import.meta.env` in playwright tests*
 
 # Refactoring Styles
