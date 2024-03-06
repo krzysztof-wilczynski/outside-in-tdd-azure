@@ -206,4 +206,6 @@ export default api
 
 `VITE_API_KEY` is stored in .env and Azure Static App environment variables
 
+*remember that playwright tests require using `process.env` instead of `import.meta.env`*
+
 # Refactoring Styles

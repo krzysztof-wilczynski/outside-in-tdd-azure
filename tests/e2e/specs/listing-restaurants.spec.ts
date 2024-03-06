@@ -1,12 +1,17 @@
 import {test, expect} from '@playwright/test'
 
+
+
 test('shows restaurants from the server', async ({page}) => {
+  test.setTimeout(10000);
+
   const pastaPlace = 'Pasta Place'
   const saladPlace = 'Salad Place'
 
-  await page.route('https://api.outsidein.dev/JI4xJoO0YSYGiqk2fTIUSwqQdkBYFXbC/restaurants',
+  await page.route(`https://api.outsidein.dev/${process.env.VITE_API_KEY}`,
     async route => {
       const json = [
+
         {id: 1, name: pastaPlace},
         {id: 2, name: saladPlace}
       ]

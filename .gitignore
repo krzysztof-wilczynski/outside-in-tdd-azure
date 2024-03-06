@@ -35,10 +35,8 @@ yarn-error.log*
 *.sln
 
 # local .env files
-.env.local*
+*.env*
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-
-*.env
