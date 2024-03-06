@@ -204,8 +204,15 @@ const api = {
 export default api
 ```
 
-`VITE_API_KEY` is stored in .env and Azure Static App environment variables and Github Actions secrets
+`VITE_API_KEY` is stored in .env file locally, Azure Static App environment variables and Github Actions secrets
+`build_and_deploy` task should contain env
+```yaml
+env:
+  VITE_API_KEY: ${{ secrets.VITE_API_KEY}}
+ ```
 
+
+// TODO: czy to nadal prawda?
 *remember to use `process.env` instead of `import.meta.env` in playwright tests*
 
 # Refactoring Styles
