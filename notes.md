@@ -145,3 +145,74 @@ installPinia({
   stubActions: false
 })
 ```
+## Unit testing the store
+tests/unit/store/restaurants.spec.ts
+```typescript
+import {setActivePinia, createPinia} from 'pinia';
+import {useRestaurantsStore} from 'stores/restaurants-store';
+import {vi, describe, it, expect, beforeEach} from 'vitest';
+import api from 'src/api';
+
+
+// explanation on "why mock, not spyon"
+// https://github.com/vitest-dev/vitest/discussions/4224#discussioncomment-7224838
+
+vi.mock('src/api', () => ({
+  default: {
+    loadRestaurants: vi.fn()
+  }
+}))
+
+describe('Restaurants Store', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
+  describe('load action', () => {
+    it('stores the restaurants', async () => {
+      const records = [
+        {id: 1, name: 'Sushi Place'},
+        {id: 2, name: 'Pizza Place'}
+      ];
+
+      vi.mocked(api.loadRestaurants).mockResolvedValueOnce(records)
+      const store = useRestaurantsStore()
+
+      await store.load()
+      expect(store.restaurantsList).toEqual(records)
+    })
+  })
+})
+```
+
+// to clarify: can axios be store outside quasar's boot?
+api.ts
+```typescript
+import axios from 'axios';
+
+const client = axios.create({
+  baseURL: `https://api.outsidein.dev/${import.meta.env.VITE_API_KEY}`
+})
+
+const api = {
+  async loadRestaurants() {
+    const response = await client.get('/restaurants');
+    return response.data;
+  }
+}
+
+export default api
+```
+
+`VITE_API_KEY` is stored in .env file locally, Azure Static App environment variables and Github Actions secrets
+`build_and_deploy` task should contain env
+```yaml
+env:
+  VITE_API_KEY: ${{ secrets.VITE_API_KEY}}
+ ```
+
+
+// TODO: czy to nadal prawda?
+*remember to use `process.env` instead of `import.meta.env` in playwright tests*
+
+# Refactoring Styles
