@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-// TODO: env dla apikey
 const client = axios.create({
-  baseURL: 'https://api.outsidein.dev/5ce6h4BdJMIz9ScFQSH9wCtU5y2x3f4S'
+  baseURL: `https://api.outsidein.dev/${import.meta.env.VITE_API_KEY}`
 })
 
 const api = {
