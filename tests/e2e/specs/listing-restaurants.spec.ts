@@ -3,12 +3,10 @@ import {test, expect} from '@playwright/test'
 
 
 test('shows restaurants from the server', async ({page}) => {
-  test.setTimeout(10000);
-
   const pastaPlace = 'Pasta Place'
   const saladPlace = 'Salad Place'
 
-  await page.route(`https://api.outsidein.dev/${process.env.VITE_API_KEY}`,
+  await page.route(`https://api.outsidein.dev/${process.env.VITE_API_KEY}/restaurants`,
     async route => {
       const json = [
 
