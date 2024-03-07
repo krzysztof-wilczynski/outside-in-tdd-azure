@@ -145,7 +145,7 @@ installPinia({
   stubActions: false
 })
 ```
-## Unit testing the store
+## [Unit testing the store](https://outsidein.dev/vue/vertical-slice#unit-testing-the-store)
 tests/unit/store/restaurants.spec.ts
 ```typescript
 import {setActivePinia, createPinia} from 'pinia';
@@ -215,4 +215,5 @@ env:
 // TODO: czy to nadal prawda?
 *remember to use `process.env` instead of `import.meta.env` in playwright tests*
 
-# Refactoring Styles
+# [Refactoring Styles](https://outsidein.dev/vue/refactoring-styles)
+

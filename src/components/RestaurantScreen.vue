@@ -1,8 +1,13 @@
 <template>
-  <div>
-    <h1>Restaurants</h1>
-    <RestaurantList/>
-  </div>
+  <q-card>
+    <q-card-section>
+      <div class="text-h6">Restaurants</div>
+    </q-card-section>
+    <q-card-section>
+      <RestaurantList/>
+    </q-card-section>
+  </q-card>
+
 </template>
 
 <script lang="ts" setup>
